@@ -27,7 +27,7 @@
         header {
             background: rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(10px);
-            padding: 20px 0;
+            padding: 200px 0;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             animation: fadeIn 2s;
@@ -55,7 +55,7 @@
         .header-text h1 {
             color: #d2e6c1;
             margin-bottom: 5px;
-            font-size: 2.5em;
+            font-size: 3.2em;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             animation: slideInLeft 2s;
         }
@@ -69,13 +69,13 @@
         }
 
         .profile-pic {
-            width: 150px;
-            height: 150px;
+            width: 350px;
+            height: 350px;
             border-radius: 50%;
-            border: 3px solid #70b8ac;
+            border: 2px solid;
             object-fit: cover;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            animation: zoomIn 2s;
+            animation: zoomIn 3s;
         }
 
         /* Navigation Styles */
@@ -289,12 +289,12 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
         }
 
         .social-links a {
             color: #ffffff;
-            background-color: #2196F3;
+            background-color:;
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
@@ -302,7 +302,7 @@
         }
 
         .social-links a:hover {
-            background-color: #FFC107;
+            background-color: ;
         }
 
         /* Footer Styles */
@@ -316,6 +316,32 @@
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             animation: fadeInUp 2s;
         }
+.social-links {
+    display: flex;
+    gap: 41px;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+}
+
+.social-icon {
+    width: 40px; /* Adjust icon size */
+    height: 40px;
+    border-radius: 50%; /* Makes the icon circular */
+    transition: 0.3s ease-in-out;
+    filter: drop-shadow(0 0 5px transparent); /* Initial shadow (hidden) */
+}
+
+.social-link:hover .social-icon {
+    filter: drop-shadow(0 0 8px #00e1ff) brightness(1.2); /* Neon effect */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
 
         /* Animations */
         @keyframes fadeIn {
@@ -396,17 +422,37 @@
 </head>
 
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="header-text">
-                    <h1>Muktananda Hiremath</h1>
-                    <p>Machine Learning Enthusiast | Real-World Problem Solver</p>
+<header>
+    <div class="container">
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Muktananda Hiremath</h1>
+                <p>Machine Learning Enthusiast | Real-World Problem Solver</p>
+
+                <div class="social-links">
+                    <a href="https://www.instagram.com/muktanandagh" target="_blank" class="social-link">
+                        <img src="insta.jpeg" alt="Instagram" class="social-icon">
+                    </a>
+                    <a href="mailto:youremail@example.com" class="social-link">
+                        <img src="Mail.png" alt="Email" class="social-icon">
+                    </a>
+                    <a href="https://www.linkedin.com/in/muktananda-hiremath-5b3811304" target="_blank" class="social-link">
+                        <img src="in.jpeg" alt="LinkedIn" class="social-icon">
+                    </a>
                 </div>
-                <img src="MG.jpg" alt="Muktananda Hiremath" class="profile-pic">
             </div>
+            <img src="MG.jpg" alt="Muktananda Hiremath" class="profile-pic">
         </div>
-    </header>
+    </div>
+</header>
+<!-- Font Awesome for icons -->
+<script src="https://unpkg.com/feather-icons"></script>
+<script>
+    feather.replace();
+</script>
+
+
+
 
     <nav>
         <div class="container">
@@ -415,6 +461,7 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#achievements">Achievements</a></li>
+                  <li><a href="#certificate">Certifications</a></li>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -436,7 +483,7 @@
         <div class="container">
             <h2>Skills</h2>
             <p>Machine Learning, Natural Language Processing (NLP), Data Visualization, Python, Scikit-Learn,
-                TensorFlow, Docker, HTML, CSS, JavaScript.</p>
+                TensorFlow, Docker, HTML, CSS.</p>
         </div>
     </section>
 
@@ -475,6 +522,21 @@
                 hackathons.</p>
         </div>
     </section>
+     <section id="certificate">
+        <div class="container">
+            <h2>Certifications</h2>
+            <div class="project-list">
+                <div class="project-card">
+                    <h3>Machine Learning Certification - Udmey</h3>
+                    <a href="ml-cer.jpeg" target="_blank">View</a>
+                </div>
+                <div class="project-card">
+                    <h3>Data Science Certification- Udmey</h3>
+                    <a href="" target="_blank">View </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="education">
         <div class="container">
@@ -489,12 +551,18 @@
         <div class="container">
             <h2>Contact</h2>
             <p>Let's connect:</p>
-            <div class="social-links">
-                <a href="mailto:hmuktanandg@gmail.com">Email</a>
-                <a href="https://www.linkedin.com/in/muktananda-hiremath-5b3811304" target="_blank">LinkedIn</a>
-                <a href="https://instagram.com/muktanandgh" target="_blank">Instagram</a>
+           <div class="social-links">
+                    <a href="https://instagram.com/muktanandgh" target="_blank" class="social-link">
+                        <img src="insta.jpeg" alt="Instagram" class="social-icon">
+                    </a>
+                    <a href="mailto:hmuktanandg@gmail.com" class="social-link">
+                        <img src="Mail.png" alt="Email" class="social-icon">
+                    </a>
+                    <a href="https://www.linkedin.com/in/muktananda-hiremath-5b3811304" target="_blank" class="social-link">
+                        <img src="in.jpeg" alt="LinkedIn" class="social-icon">
+                    </a>
+                </div>
             </div>
-        </div>
     </section>
 
     <footer>
