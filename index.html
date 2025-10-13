@@ -9,35 +9,41 @@
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        /* Import the new fonts: Merriweather for headings, Lato for body */
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Lato:wght@400;600;700&display=swap');
 
-        /* General Styles */
+        /* --- Color Palette --- */
+        /* Primary Accent (Titles): #732c2c (Deep Burgundy) */
+        /* Secondary Accent (Buttons/Highlight): #5a947d (Muted Green) */
+
+        /* General Styles - Cream/Textured Light Theme */
         body {
-            font-family: 'Poppins', sans-serif;
+            /* Lato for all general body text, paragraph, list, etc. */
+            font-family: 'Lato', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #1a1d23, #2c3e50, #3b3f4e);
-            color: #ffffff;
+            background: linear-gradient(135deg, #fffdf5 0%, #f7f5e8 100%);
+            color: #333333;
             line-height: 1.6;
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        /* Header Styles */
-        header {
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            padding: 200px 0;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 2s;
-        }
-
         .container {
             width: 80%;
+            max-width: 1200px;
             margin: auto;
             overflow: hidden;
             padding: 0 20px;
+        }
+
+        /* --- Header Styles --- */
+        header {
+            background: linear-gradient(to top, #fffdf5, #f7f5e8);
+            padding: 200px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s;
         }
 
         .header-content {
@@ -53,18 +59,21 @@
         }
 
         .header-text h1 {
-            color: #d2e6c1;
+            /* --- MERRIWEATHER for the main name --- */
+            font-family: 'Merriweather', serif; 
+            font-weight: 900; /* Extra bold for impact */
+            font-size: 3.8em; 
+            letter-spacing: -1px; /* Slightly tighter spacing for prominence */
+            color: #732c2c; 
             margin-bottom: 5px;
-            font-size: 3.2em;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             animation: slideInLeft 2s;
         }
 
         .header-text p {
             font-size: 1.2em;
-            color: #1de4a1;
-            font-weight: 500;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            color: #555555;
+            font-weight: 600; /* Lato Semibold */
+            margin-bottom: 25px;
             animation: slideInRight 2s;
         }
 
@@ -72,18 +81,82 @@
             width: 350px;
             height: 350px;
             border-radius: 50%;
-            border: 2px solid;
+            border: 4px solid #5a947d;
             object-fit: cover;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
             animation: zoomIn 3s;
         }
 
-        /* Navigation Styles */
+        /* NEW STYLES FOR HEADER BUTTONS */
+        .header-buttons {
+            display: flex;
+            justify-content: flex-start; /* Aligns buttons to the left */
+            gap: 15px; /* Spacing between buttons */
+            margin-top: 10px; /* Space below the header text */
+            flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+        }
+
+        .header-buttons .btn {
+            color: #ffffff;
+            background-color: #5a947d; /* Muted Green accent */
+            padding: 12px 20px;
+            text-decoration: none;
+            font-weight: 700; 
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 1em;
+            white-space: nowrap; /* Keeps button text on one line */
+        }
+
+        .header-buttons .btn:hover {
+            background-color: #7ab39c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Remove or re-purpose the old social link styles */
+        .social-links {
+            display: flex;
+            justify-content: flex-start; 
+            gap: 30px; 
+        }
+
+        #contact .social-links {
+            justify-content: center;
+        }
+        
+        /* You can safely remove the .social-link and .social-icon rules 
+           if you don't plan to use image-based social links elsewhere. 
+           I'll leave them for now since they are used in the contact section. */
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .social-icon {
+            width: 40px; 
+            height: 40px;
+            border-radius: 50%;
+            transition: 0.3s ease-in-out;
+            filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.1)); 
+        }
+
+        .social-link:hover .social-icon {
+            filter: drop-shadow(0 0 8px #5a947d) brightness(1.1); 
+            transform: scale(1.1);
+        }
+        /* END NEW STYLES */
+
+        /* --- Navigation Styles --- */
         nav {
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
+            background: #fffdf5;
+            backdrop-filter: blur(5px);
             padding: 10px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -104,26 +177,25 @@
         }
 
         nav ul li a {
-            color: #d4872e;
+            color: #495057;
             text-decoration: none;
             font-size: 1.1em;
-            font-weight: 600;
+            font-weight: 700; /* Lato bold for navigation */
             padding: 10px 15px;
             border-radius: 5px;
             transition: color 0.3s, background-color 0.3s;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         nav ul li a:hover {
-            color: #FFC107;
-            background-color: rgba(255, 193, 7, 0.1);
+            color: #5a947d;
+            background-color: rgba(90, 148, 125, 0.1);
         }
 
-        /* Section Styles */
+        /* --- Section Styles --- */
         section {
             padding: 60px 0;
             text-align: center;
-            border-bottom: 1px solid #2d2d2d;
+            border-bottom: 1px solid #e0e0e0;
             animation: fadeInUp 2s;
         }
 
@@ -131,22 +203,20 @@
             border-bottom: none;
         }
 
-        #about {
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
         section h2 {
-            color: #2196F3;
+            /* --- MERRIWEATHER for all section headings --- */
+            font-family: 'Merriweather', serif; 
+            color: #5a947d; 
             font-size: 2.2em;
+            font-weight: 700; 
             margin-bottom: 20px;
             position: relative;
             padding-bottom: 10px;
             display: inline-block;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             animation: slideInDown 2s;
         }
 
+        /* General Section H2 Underline */
         section h2::after {
             content: '';
             position: absolute;
@@ -155,279 +225,263 @@
             transform: translateX(-50%);
             height: 3px;
             width: 70px;
-            background: #2196F3;
+            background: #5a947d;
         }
+        
+        /* OVERRIDE FOR NEW ACHIEVEMENT HEADING STYLE */
+        .achievements-section h2 {
+            color: #732c2c; /* Deep Burgundy for a stronger title */
+            font-size: 3.0rem; /* Adjusted size for balance */
+            margin-bottom: 70px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .achievements-section h2::after {
+            width: 100px; /* Wider underline for a bigger title */
+            height: 4px;
+            background-color: #732c2c; 
+            bottom: -25px;
+        }
+        /* END OVERRIDE */
+
 
         .about-text {
             max-width: 700px;
             margin: 20px auto;
             text-align: justify;
             line-height: 1.7;
-            color: #a8b2d1;
+            color: #555555;
             font-size: 1.1em;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 2s;
         }
 
-        /* Skills Section */
-        #skills p {
-            color: #a8b2d1;
+        /* Non-Card Section Text Styles */
+        #skills p, #education p {
+            max-width: 800px;
+            margin: 20px auto;
+            color: #555555;
             font-size: 1.1em;
-            margin-bottom: 30px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            animation: slideInLeft 2s;
-        }
-
-    /* Projects Section */
-#projects {
-    background: rgba(0, 0, 0, 0.12);
-    backdrop-filter: blur(14px);
-    padding: 70px 0;
-}
-
-.container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 0 20px;
-}
-
-.project-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 30px;
-    justify-content: center;
-    align-items: stretch;
-}
-
-.project-card {
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(15px);
-    border-radius: 14px;
-    padding: 30px;
-    text-align: left;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: fadeInUp 1.2s ease-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-}
-
-.project-card h3 {
-    color: #1976D2;
-    margin-bottom: 14px;
-    font-weight: 600;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-    animation: slideInDown 1.2s ease-out;
-}
-
-.project-card p {
-    color: #CFD8DC;
-    margin-bottom: 18px;
-    font-size: 1rem;
-    line-height: 1.6;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 1.2s ease-out;
-}
-
-.project-card a {
-    color: #ffffff;
-    background-color: #2E7D32;
-    padding: 14px 20px;
-    text-decoration: none;
-    font-weight: 500;
-    border-radius: 8px;
-    display: inline-block;
-    align-self: flex-start;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.project-card a:hover {
-    background-color: #FFB300;
-    transform: scale(1.07);
-}
-
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .project-list {
-        flex-direction: column;
-    }
-
-    .project-card {
-        flex: 1 1 100%;
-    }
-}
-
-
-        /* Achievements Section */
-        #achievements p {
-            color: #a8b2d1;
-            font-size: 1.1em;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            animation: slideInRight 2s;
-        }
-
-        /* Education Section */
-        #education p {
-            color: #a8b2d1;
-            font-size: 1.1em;
+            line-height: 1.7;
             margin-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            animation: slideInLeft 2s;
+            text-align: center;
+        }
+        
+        /* --- Project/Certificate Card Layout --- */
+        #projects, #certificate, #achievements {
+            padding: 70px 0;
         }
 
-        /* Contact Section */
-        #contact {
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        #contact p {
-            color: #a8b2d1;
-            font-size: 1.2em;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 2s;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
+        .project-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 30px;
+            justify-content: center;
+            align-items: stretch;
         }
 
-        .social-links a {
+        .project-card {
+            background: #fffdf5; 
+            border-radius: 10px;
+            padding: 30px;
+            text-align: left;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 1.2s ease-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #e0e0e0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .project-card h3 {
+            /* Using Merriweather for project titles as well */
+            font-family: 'Merriweather', serif; 
+            color: #732c2c;
+            margin-bottom: 14px;
+            font-weight: 700;
+        }
+
+        .project-card p {
+            color: #555555;
+            margin-bottom: 18px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-card a {
             color: #ffffff;
-            background-color:;
-            padding: 10px 20px;
+            background-color: #5a947d; 
+            padding: 10px 18px;
             text-decoration: none;
+            font-weight: 700; /* Lato bold for button text */
             border-radius: 5px;
-            transition: background-color 0.3s;
+            display: inline-block;
+            align-self: flex-start;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
-        .social-links a:hover {
-            background-color: ;
+        .project-card a:hover {
+            background-color: #7ab39c;
+            transform: scale(1.05);
+            color: #ffffff;
         }
 
-        /* Footer Styles */
+        /* --- NEW ACHIEVEMENTS GRID STYLES --- */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusted slightly for portfolio context */
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .achievement-card {
+            background: #ffffff;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            text-align: left;
+            position: relative;
+            border: 1px solid #e0e0e0;
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: 5px; 
+            left: 5px;
+            right: -5px;
+            bottom: -5px;
+            background: #f7f5e8; /* Lighter background layer to match body */
+            border-radius: 4px;
+            z-index: -1; 
+            transition: transform 0.4s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .achievement-card:hover::before {
+            transform: translate(3px, 3px); 
+        }
+        
+        .achievement-card img {
+            width: 100%;
+            /* --- INCREASED IMAGE HEIGHT HERE --- */
+            height: 350px; 
+            /* ---------------------------------- */
+            object-fit: cover;
+            filter: grayscale(10%); 
+            transition: filter 0.4s, transform 0.4s;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .achievement-card:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.02);
+        }
+
+        .achievement-info {
+            padding: 18px 25px 22px; 
+        }
+
+        .achievement-info h3 {
+            font-family: 'Merriweather', serif; 
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #732c2c; /* Burgundy for card title */
+            letter-spacing: 0.2px;
+            transition: color 0.4s;
+        }
+
+        .achievement-info p {
+            font-size: 0.95rem; 
+            color: #555;
+            line-height: 1.5; 
+        }
+
+        .achievement-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #5a947d; /* Muted Green accent */
+            color: #fff;
+            padding: 8px 15px;
+            border-bottom-left-radius: 4px; 
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+        /* --- END NEW ACHIEVEMENTS GRID STYLES --- */
+
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .project-list, .achievements-grid {
+                grid-template-columns: 1fr; 
+                max-width: 600px;
+            }
+        }
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            .profile-pic {
+                margin-top: 30px;
+                width: 250px;
+                height: 250px;
+            }
+            .header-text {
+                text-align: center;
+            }
+            .header-buttons {
+                justify-content: center; /* Center buttons on mobile */
+            }
+            .social-links {
+                justify-content: center;
+            }
+            .header-text h1 {
+                font-size: 3.2em;
+            }
+            .achievements-section h2 {
+                font-size: 2.5rem;
+            }
+            /* Adjusted responsive height for achievement images */
+            .achievement-card img {
+                height: 250px;
+            }
+        }
+
+        /* --- Footer Styles --- */
         footer {
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
+            background: #eae7d3;
             padding: 20px 0;
             text-align: center;
-            color: #a8b2d1;
+            color: #6c757d;
             font-size: 0.9em;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             animation: fadeInUp 2s;
         }
-.social-links {
-    display: flex;
-    gap: 41px;
-}
-
-.social-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease-in-out;
-    position: relative;
-}
-
-.social-icon {
-    width: 40px; /* Adjust icon size */
-    height: 40px;
-    border-radius: 50%; /* Makes the icon circular */
-    transition: 0.3s ease-in-out;
-    filter: drop-shadow(0 0 5px transparent); /* Initial shadow (hidden) */
-}
-
-.social-link:hover .social-icon {
-    filter: drop-shadow(0 0 8px #00e1ff) brightness(1.2); /* Neon effect */
-    transform: scale(1.1); /* Slightly enlarge on hover */
-}
-
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                transform: translateX(-20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                transform: translateX(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideInDown {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes zoomIn {
-            from {
-                transform: scale(0.8);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
+        
+        /* Animations (Kept as is) */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { transform: translateY(0); opacity: 1; } }
+        @keyframes slideInLeft { from { transform: translateX(-20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideInRight { from { transform: translateX(20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideInDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     </style>
 </head>
 
@@ -437,32 +491,23 @@
         <div class="header-content">
             <div class="header-text">
                 <h1>Muktananda Hiremath</h1>
-                <p>Machine Learning Enthusiast | Real-World Problem Solver</p>
+                 <p>Full-Stack Developer | Backend Specialist | Machine Learning Enthusiast</p>
 
-                <div class="social-links">
-                    <a href="https://www.instagram.com/muktanandagh" target="_blank" class="social-link">
-                        <img src="insta.jpeg" alt="Instagram" class="social-icon">
-                    </a>
-                    <a href="mailto:youremail@example.com" class="social-link">
-                        <img src="Mail.png" alt="Email" class="social-icon">
-                    </a>
-                    <a href="https://www.linkedin.com/in/muktananda-hiremath-5b3811304" target="_blank" class="social-link">
-                        <img src="in.jpeg" alt="LinkedIn" class="social-icon">
-                    </a>
+                <div class="header-buttons">
+                    <a href="https://www.linkedin.com/in/muktananda-hiremath-5b3811304" target="_blank" class="btn">LinkedIn Profile</a>
+                    <a href="Muktananda_Hiremath_Resume.pdf" target="_blank" class="btn">Download Resume</a>
+                    <a href="#contact" class="btn">Contact Me</a>
                 </div>
+
             </div>
             <img src="MG.jpg" alt="Muktananda Hiremath" class="profile-pic">
         </div>
     </div>
 </header>
-<!-- Font Awesome for icons -->
 <script src="https://unpkg.com/feather-icons"></script>
 <script>
     feather.replace();
 </script>
-
-
-
 
     <nav>
         <div class="container">
@@ -471,7 +516,7 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#achievements">Achievements</a></li>
-                  <li><a href="#certificate">Certifications</a></li>
+                <li><a href="#certificate">Certifications</a></li>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -481,20 +526,23 @@
     <section id="about">
         <div class="container">
             <h2>About Me</h2>
-            <p class="about-text">I am a passionate Machine Learning enthusiast dedicated to exploring AI and Data Science
-                for real-world applications. I specialize in predictive modeling, Natural Language Processing (NLP), and
-                recommendation systems. With hands-on project experience, I aim to create impactful solutions using
-                technology. I actively contribute to open-source projects and continually enhance my skill set through
-                research and collaboration.</p>
+            <p class="about-text">
+            I am a passionate software developer and Machine Learning enthusiast with experience in building real-world applications. I specialize in backend development using Spring Boot, designing scalable RESTful APIs, and integrating modern frontend technologies. Alongside, I have hands-on experience in Machine Learning, including predictive modeling, NLP, and recommendation systems. I actively contribute to open-source projects and continuously enhance my skills through practical projects and collaboration, aiming to deliver impactful and efficient technology solutions.
+        </p>
+
         </div>
     </section>
 
     <section id="skills">
         <div class="container">
-            <h2>Skills</h2>
-            <p>Machine Learning, Natural Language Processing (NLP), Data Visualization, Python, Scikit-Learn,
-                TensorFlow, Docker, HTML, CSS.</p>
-        </div>
+    <h2>Skills</h2>
+    <p>
+        <strong>Development:</strong> Spring Boot, Java, RESTful APIs,PostgreSQL, Thymeleaf, Maven, Git<br>
+        <strong>DevOps & Tools:</strong> Docker, GitHub, CI/CD pipelines<br>
+        <strong>Machine Learning:</strong> Python, Scikit-Learn, TensorFlow, NLP, Data Visualization
+    </p>
+</div>
+
     </section>
 
     <section id="projects">
@@ -525,14 +573,43 @@
         </div>
     </section>
     
-    <section id="achievements">
+    <section id="achievements" class="achievements-section">
         <div class="container">
-            <h2>Achievements</h2>
-            <p>Recognized for contributions in ML and AI. Completed multiple certifications and participated in
-                hackathons.</p>
+            <h2>Professional Milestones</h2>
+            <div class="achievements-grid">
+
+                <div class="achievement-card">
+                    <div class="achievement-badge">Winner</div>
+                    <img src="Avi.jpg" alt="Avirat Hackathon Winner">
+                    <div class="achievement-info">
+                        <h3>Avirat Hackathon - Grand Winner</h3>
+                        <p>Awarded first place among 75+ teams for building a real-time Hospital Management tool that streamlines hospital operations, combining React for an intuitive frontend and Flask for a scalable backend solution.</p>
+                    </div>
+                </div>
+
+                <div class="achievement-card">
+                    <div class="achievement-badge">Top 5</div>
+                    <img src="Hal.jpg" alt="HalArerothon Top 5">
+                    <div class="achievement-info">
+                        <h3>HalArerothon - Elite Top 5 Finish</h3>
+                        <p>Secured a Top 5 position in this national-level competition for a project focused on analyzing military videos to assist defense operations, implementing advanced object detection with a YOLO-based backend to solve complex real-world challenges.</p>
+                    </div>
+                </div>
+
+                <div class="achievement-card">
+                    <div class="achievement-badge">Leadership</div>
+                    <img src="Lead.jpg" alt="Team Leadership">
+                    <div class="achievement-info">
+                        <h3>Project Leadership & Mentorship</h3>
+                        <p>Spearheaded key projects, ensuring timely delivery through effective team leadership, technical direction, and process optimization throughout the development lifecycle.</p>
+                    </div>
+                </div>
+                
+            </div>
         </div>
     </section>
-     <section id="certificate">
+    
+    <section id="certificate">
         <div class="container">
             <h2>Certifications</h2>
             <div class="project-list">
@@ -544,11 +621,11 @@
                     <h3>Python for ML Certification- Udmey</h3>
                     <a href="Python.jpeg" target="_blank">View </a>
                 </div>
-                                <div class="project-card">
+                <div class="project-card">
                     <h3>Natural Language processing Certification- Udmey</h3>
                     <a href="Nlp.jpeg" target="_blank">View </a>
                 </div>
-                                <div class="project-card">
+                <div class="project-card">
                     <h3>Tensorflow Certification- Udmey</h3>
                     <a href="Tensor.jpeg" target="_blank">View </a>
                 </div>
@@ -569,18 +646,18 @@
         <div class="container">
             <h2>Contact</h2>
             <p>Let's connect:</p>
-           <div class="social-links">
-                    <a href="https://instagram.com/muktanandgh" target="_blank" class="social-link">
-                        <img src="insta.jpeg" alt="Instagram" class="social-icon">
-                    </a>
-                    <a href="mailto:hmuktanandg@gmail.com" class="social-link">
-                        <img src="Mail.png" alt="Email" class="social-icon">
-                    </a>
-                    <a href="https://www.linkedin.com/in/muktananda-hiremath-5b3811304" target="_blank" class="social-link">
-                        <img src="in.jpeg" alt="LinkedIn" class="social-icon">
-                    </a>
-                </div>
+            <div class="social-links">
+                <a href="https://instagram.com/muktanandgh" target="_blank" class="social-link">
+                    <img src="insta.jpeg" alt="Instagram" class="social-icon">
+                </a>
+                <a href="mailto:hmuktanandg@gmail.com" class="social-link">
+                    <img src="Mail.png" alt="Email" class="social-icon">
+                </a>
+                <a href="https://www.linkedin.com/in/muktananda-hiremath-5b3811304" target="_blank" class="social-link">
+                    <img src="in.jpeg" alt="LinkedIn" class="social-icon">
+                </a>
             </div>
+        </div>
     </section>
 
     <footer>
