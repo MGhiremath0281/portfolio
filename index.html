@@ -969,114 +969,133 @@
             <p>&copy; 2025 Muktananda Hiremath. All Rights Reserved.</p>
         </div>
     </footer>
-
-
     <script>
-        // Typing Animation
-        const phrases = [
-            'Full-Stack Developer',
-            'Backend Specialist',
-            'Machine Learning Enthusiast',
-            'Problem Solver',
-            'Open Source Contributor'
-        ];
-        
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const typingSpeed = 100;
-        const deletingSpeed = 50;
-        const pauseTime = 2000;
+    // Typing Animation (Unchanged)
+const phrases = [
+'Full-Stack Developer',
+'Backend Specialist',
+'Machine Learning Enthusiast',
+'Problem Solver',
+'Open Source Contributor'
+];
+let phraseIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const typingSpeed = 100;
+const deletingSpeed = 50;
+const pauseTime = 2000;
 
-        function typeText() {
-            const typingText = document.getElementById('typingText');
-            const currentPhrase = phrases[phraseIndex];
+function typeText() {
+const typingText = document.getElementById('typingText');
+const currentPhrase = phrases[phraseIndex];
 
-            if (isDeleting) {
-                typingText.textContent = currentPhrase.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typingText.textContent = currentPhrase.substring(0, charIndex + 1);
-                charIndex++;
-            }
+if (isDeleting) {
+typingText.textContent = currentPhrase.substring(0, charIndex - 1);
+charIndex--;
+} else {
+typingText.textContent = currentPhrase.substring(0, charIndex + 1);
+charIndex++;
+}
 
-            let typeSpeed = isDeleting ? deletingSpeed : typingSpeed;
+let typeSpeed = isDeleting ? deletingSpeed : typingSpeed;
 
-            if (!isDeleting && charIndex === currentPhrase.length) {
-                typeSpeed = pauseTime;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-                typeSpeed = 500;
-            }
+if (!isDeleting && charIndex === currentPhrase.length) {
+typeSpeed = pauseTime;
+isDeleting = true;
+} else if (isDeleting && charIndex === 0) {
+isDeleting = false;
+phraseIndex = (phraseIndex + 1) % phrases.length;
+typeSpeed = 500;
+}
 
-            setTimeout(typeText, typeSpeed);
+setTimeout(typeText, typeSpeed);
+}
+
+// Start typing animation when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(typeText, 1000);
+});
+
+// --- Scroll-Triggered Section Animations (Enhanced) ---
+
+// Intersection Observer for section animations
+const sections = document.querySelectorAll('section');
+// Use a tighter threshold for the 'about' section to make it pop up quicker
+const observerOptions = {
+    threshold: 0.15,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Add 'visible' class to trigger initial slide-up/fade-in
+            entry.target.classList.add('visible');
         }
+    });
+}, observerOptions);
 
-        // Start typing animation when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(typeText, 1000);
-        });
+sections.forEach(section => {
+    observer.observe(section);
+});
 
-        // Intersection Observer for section animations
-        const sections = document.querySelectorAll('section');
+// --- Header Parallax and Fade-Out (Adjusted for 'Come Up' Effect) ---
+
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const header = document.querySelector('header');
+    
+    if (header) {
+        // Adjust the translateY factor (0.5 to 0.8) for a stronger parallax effect
+        // This makes the background/hero section move slower than the scroll,
+        // giving the illusion that the content below is 'coming up' over it.
+        header.style.transform = `translateY(${scrolled * 0.8}px)`; 
         
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -100px 0px'
-        };
+        // This makes the hero section fade out quickly as you scroll down
+        header.style.opacity = 1 - (scrolled / 500); 
+    }
+    
+    // Optional: Animate the first section (e.g., #about) as the header disappears
+    const firstSection = document.querySelector('section:first-of-type');
+    if (firstSection) {
+        // Apply a subtle upward movement/scaling to the first section only 
+        // as you scroll, enhancing the 'coming up' feel
+        const maxScroll = 500; // Match the fade-out point
+        const scrollRatio = Math.min(scrolled / maxScroll, 1);
+        
+        // Move the section up slightly as the header fades out
+        const translateY = 20 - (20 * scrollRatio); 
+        firstSection.style.transform = `translateY(${translateY}px)`;
+        firstSection.style.transition = 'none'; // Prevent jarring transition
+    }
+});
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+
+// Form submission handler (Unchanged)
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    // You can add your form submission logic here
+    alert(`Thank you ${name}! Your message has been received. I'll get back to you soon at ${email}.`);
+    // Reset form
+    this.reset();
+});
+
+// Smooth scroll for navigation links (Unchanged)
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
             });
-        }, observerOptions);
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-
-        // Form submission handler
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            // You can add your form submission logic here
-            alert(`Thank you ${name}! Your message has been received. I'll get back to you soon at ${email}.`);
-            
-            // Reset form
-            this.reset();
-        });
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add parallax effect to header
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const header = document.querySelector('header');
-            if (header) {
-                header.style.transform = `translateY(${scrolled * 0.5}px)`;
-                header.style.opacity = 1 - (scrolled / 800);
-            }
-        });
-    </script>
+        }
+    });
+});
+</script>
 </body>
 </html>
