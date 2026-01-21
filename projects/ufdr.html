@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-UFDR Forensic Intelligence | Technical Brief</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700&family=Crimson+Pro:wght@600;700&family=Fira+Code:wght@400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --slate-900: #0f172a;
+            --slate-700: #334155;
+            --slate-100: #f1f5f9;
+            --moss-green: #2d3e33;
+            --gold-accent: #b48e4d;
+            --white: #ffffff;
+            --border-light: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--slate-700);
+            font-family: 'Public Sans', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* --- Hero Section --- */
+        header {
+            background: var(--white);
+            padding: 80px 20px 40px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #ecfdf5;
+            color: #065f46;
+            padding: 6px 16px;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            border: 1px solid #d1fae5;
+        }
+
+        h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            color: var(--slate-900);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--slate-700);
+            font-size: 1.15rem;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 100px;
+        }
+
+        /* --- Team Photo Hero --- */
+        .photo-strip {
+            width: 100%;
+            height: 500px;
+            background: var(--slate-100);
+            border-radius: 24px;
+            overflow: hidden;
+            margin: 40px 0;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-light);
+            position: relative;
+        }
+
+        .photo-strip img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(15, 23, 42, 0.8));
+            padding: 40px;
+            color: white;
+        }
+
+        /* --- Info Grid (Capabilities) --- */
+        .section-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2rem;
+            color: var(--slate-900);
+            margin: 60px 0 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .info-card {
+            background: var(--white);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            transition: transform 0.2s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .info-card i {
+            color: var(--gold-accent);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .info-card h3 {
+            margin-bottom: 12px;
+            color: var(--slate-900);
+        }
+
+        .info-card p {
+            font-size: 0.95rem;
+            color: var(--slate-700);
+        }
+
+        /* --- Technical Table --- */
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 30px 0;
+            border: 1px solid var(--border-light);
+        }
+
+        .tech-table th {
+            background: #f8fafc;
+            text-align: left;
+            padding: 16px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--slate-900);
+            border-bottom: 2px solid var(--border-light);
+        }
+
+        .tech-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 0.95rem;
+        }
+
+        /* --- Team Cards --- */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .member-card {
+            background: var(--white);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .member-initials {
+            width: 48px;
+            height: 48px;
+            background: var(--slate-100);
+            color: var(--moss-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .member-details b {
+            display: block;
+            color: var(--slate-900);
+            font-size: 1rem;
+        }
+
+        .member-details span {
+            font-size: 0.75rem;
+            color: var(--gold-accent);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        /* --- Video CTA --- */
+        .video-cta {
+            background: var(--moss-green);
+            border-radius: 24px;
+            padding: 60px 40px;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .qr-box {
+            background: white;
+            padding: 12px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gold-accent);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #9c7b41;
+        }
+
+        @media (max-width: 768px) {
+            .photo-strip {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="status-pill">
+            <i class="fas fa-check-circle"></i> PROJECT STATUS: OPERATIONAL
+        </div>
+        <h1>AI-UFDR Forensic Intelligence</h1>
+        <p class="subtitle">Transforming Universal Forensic Data Recovery (UFDR) into structured, actionable
+            intelligence using air-gapped neural processing.</p>
+    </header>
+
+    <div class="container">
+
+        <div class="photo-strip">
+            <img src="../images/team.jpeg" alt="Team Kaizen7 Forensic Group">
+            <div class="photo-caption">
+                <h2 style="font-family: 'Crimson Pro'; font-size: 1.8rem;">Project Team: Kaizen7</h2>
+                <p style="opacity: 0.9;">Forensic Data Scientists & System Architects</p>
+            </div>
+        </div>
+
+        <h2 class="section-title"><i class="fas fa-microchip"></i> System Capabilities</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <i class="fas fa-language"></i>
+                <h3>Natural Language Processing</h3>
+                <p>Automated identification of key actors, suspicious timestamps, and entity relationships across
+                    fragmented chat logs.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Air-Gapped Privacy</h3>
+                <p>Designed for sensitive environments; all Large Language Model (LLM) inferences are performed on local
+                    silicon—no data leaves the premise.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-project-diagram"></i>
+                <h3>Relational Mapping</h3>
+                <p>Converts static XML/UFDR exports into a dynamic PostgreSQL environment for complex cross-device query
+                    analysis.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title"><i class="fas fa-layer-group"></i> Technical Specification</h2>
+        <table class="tech-table">
+            <thead>
+                <tr>
+                    <th>Domain</th>
+                    <th>Technology Implemented</th>
+                    <th>Key Objective</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Vision Engine</b></td>
+                    <td>YOLOv11 Neural Network</td>
+                    <td>Automated contraband & object classification</td>
+                </tr>
+                <tr>
+                    <td><b>Intelligence</b></td>
+                    <td>Llama 3 / Gemini (Local)</td>
+                    <td>Semantic summarization and entity extraction</td>
+                </tr>
+                <tr>
+                    <td><b>Data Core</b></td>
+                    <td>PostgreSQL / Vector DB</td>
+                    <td>High-speed relational & similarity search</td>
+                </tr>
+                <tr>
+                    <td><b>Interface</b></td>
+                    <td>HTML5 / Modern JS</td>
+                    <td>Forensic investigator dashboard</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title"><i class="fas fa-users"></i> Project Leadership</h2>
+        <div class="team-grid" id="teamTarget"></div>
+
+        <div class="video-cta">
+            <h2 style="font-family: 'Crimson Pro'; font-size: 2.2rem; margin-bottom: 12px;">Operational Demonstration
+            </h2>
+            <p style="opacity: 0.8; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Explore the technical architecture and real-time processing capability of the AI-UFDR system through our
+                operational walkthrough.</p>
+
+            <div class="qr-box">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://drive.google.com/file/d/197vbD9lxiUv7nxMnQg8cSZYdU5ZFIPTo/view?usp=sharing"
+                    alt="QR Link">
+            </div>
+
+            <br>
+            <a href="https://drive.google.com/file/d/197vbD9lxiUv7nxMnQg8cSZYdU5ZFIPTo/view?usp=sharing" target="_blank"
+                class="btn-primary">
+                <i class="fas fa-play"></i> LAUNCH VIDEO BRIEFING
+            </a>
+
+            <p style="font-family: 'Fira Code'; font-size: 0.7rem; margin-top: 40px; opacity: 0.5;">
+                SECURE LOG // K7-REF-2024-SYS
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        const team = [
+            { name: "Mukatananda Hiremath", role: "AI & Backend Lead", init: "MH" },
+            { name: "Srushti Kulkarni", role: "Frontend Architect", init: "SK" },
+            { name: "Shambhavi Kulkarni", role: "Project Co-Oridnator", init: "SK" },
+            { name: "Vijayalaxmi Jampani", role: "Database Engineer", init: "VJ" },
+            { name: "Nitish Kumar", role: "Systems Engineer", init: "NK" },
+            { name: "Swastika Rangdal", role: "Data Specialist", init: "SR" }
+        ];
+
+        const target = document.getElementById('teamTarget');
+        team.forEach(m => {
+            target.innerHTML += `
+            <div class="member-card">
+                <div class="member-initials">${m.init}</div>
+                <div class="member-details">
+                    <span>${m.role}</span>
+                    <b>${m.name}</b>
+                </div>
+            </div>
+        `;
+        });
+    </script>
+</body>
+
+</html>
