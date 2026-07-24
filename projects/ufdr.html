@@ -79,10 +79,15 @@
             padding: 40px 20px 100px;
         }
 
-        /* --- Team Photo Hero --- */
+        /* --- Photo / Diagram Frame ---
+           object-fit: contain (not cover) so the FULL image is always visible,
+           regardless of its native aspect ratio — nothing gets cropped. The
+           frame keeps a comfortable viewing height and letterboxes with the
+           slate background if the image doesn't match the frame's ratio. */
         .photo-strip {
             width: 100%;
-            height: 500px;
+            min-height: 320px;
+            max-height: 640px;
             background: var(--slate-100);
             border-radius: 24px;
             overflow: hidden;
@@ -90,12 +95,18 @@
             box-shadow: var(--shadow-lg);
             border: 1px solid var(--border-light);
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .photo-strip img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            max-height: 640px;
+            object-fit: contain;
+            object-position: center;
+            display: block;
         }
 
         .photo-caption {
@@ -103,7 +114,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(transparent, rgba(15, 23, 42, 0.8));
+            background: linear-gradient(transparent, rgba(15, 23, 42, 0.85));
             padding: 40px;
             color: white;
         }
@@ -262,7 +273,12 @@
 
         @media (max-width: 768px) {
             .photo-strip {
-                height: 300px;
+                min-height: 220px;
+                max-height: 420px;
+            }
+
+            .photo-strip img {
+                max-height: 420px;
             }
         }
     </style>
@@ -273,7 +289,7 @@
     <header class="hero-header">
         <div class="status-pill">
             <i class="fas fa-check-circle"></i>
-            SYSTEM STATUS: OPERATIONAL · FORENSIC PIPELINE VERIFIED
+            SYSTEM STATUS: OPERATIONAL · CHAIN-OF-CUSTODY VERIFIED
         </div>
 
         <h1 class="hero-title">
@@ -282,14 +298,14 @@
         </h1>
 
         <p class="subtitle">
-            An advanced, air-gapped forensic analysis system that converts Universal Forensic Data Recovery (UFDR)
-            extractions into normalized, structured, and evidentiary-grade intelligence through secure neural
-            processing, semantic correlation, and automated artifact classification.
+            An AI-based UFDR (Universal Forensic Extraction Device Report) analysis platform, split into two
+            cooperating applications: <b>SecureVault</b>, the RBAC-governed, AES-256 encrypted evidence vault, and
+            the <b>Main Application</b>, a natural-language query and intelligence layer built on top of it.
         </p>
 
         <p class="subtitle secondary">
-            Designed for high-assurance digital investigations, incident reconstruction, and legally defensible
-            intelligence generation in isolated environments.
+            Built for the Smart India Hackathon 2025 forensic intelligence initiative for the National
+            Investigation Agency, by Team Kaizen7.
         </p>
     </header>
 
@@ -297,32 +313,75 @@
     <div class="container">
 
         <div class="photo-strip">
-            <img src="../images/team.jpeg" alt="Team Kaizen7 Forensic Group">
+            <img src="images\team.jpeg" alt="Team Kaizen7 Forensic Group">
             <div class="photo-caption">
                 <h2 style="font-family: 'Crimson Pro'; font-size: 1.8rem;">Project Team: Kaizen7</h2>
                 <p style="opacity: 0.9;">Forensic Data Scientists & System Architects</p>
             </div>
         </div>
 
-        <h2 class="section-title"><i class="fas fa-microchip"></i> System Capabilities</h2>
+        <h2 class="section-title" style="margin-top: 20px;"><i class="fas fa-diagram-project"></i> System Overview</h2>
+        <p style="margin-bottom: 20px;">The platform is split into two independent applications. <b>SecureVault</b>
+            is the encrypted evidence-vault module — it parses UFDR exports, extracts artifacts, encrypts them
+            AES-256 at rest, and exposes them only through an RBAC-governed vault interface. The <b>Main
+            Application</b> sits on top of it — a natural-language query engine and intelligence layer that queries
+            the artifacts SecureVault has extracted and generates court-ready reports and cross-case analysis.</p>
+
+        <h2 class="section-title" id="secure-vault-section"><i class="fas fa-vault"></i> Application 1 — SecureVault</h2>
+        <p style="margin-bottom: 20px; color: var(--gold-accent); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em;">Encrypted Evidence Vault Module</p>
+
+        <h2 class="section-title"><i class="fas fa-microchip"></i> Core Objectives</h2>
         <div class="info-grid">
             <div class="info-card">
-                <i class="fas fa-language"></i>
-                <h3>Natural Language Processing</h3>
-                <p>Automated identification of key actors, suspicious timestamps, and entity relationships across
-                    fragmented chat logs.</p>
+                <i class="fas fa-file-archive"></i>
+                <h3>Normalized Extraction</h3>
+                <p>Parses heterogeneous UFDR exports and extracts every artifact category — calls, messages, contacts,
+                    media, locations, app data — into a normalized JSON schema.</p>
             </div>
             <div class="info-card">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Air-Gapped Privacy</h3>
-                <p>Designed for sensitive environments; all Large Language Model (LLM) inferences are performed on local
-                    silicon—no data leaves the premise.</p>
+                <i class="fas fa-lock"></i>
+                <h3>AES-256 Encryption at Rest</h3>
+                <p>Every artifact is AES-256 encrypted before it is written to disk, with per-case key scoping so a
+                    compromised key can never expose the entire vault.</p>
             </div>
             <div class="info-card">
-                <i class="fas fa-project-diagram"></i>
-                <h3>Relational Mapping</h3>
-                <p>Converts static XML/UFDR exports into a dynamic PostgreSQL environment for complex cross-device query
-                    analysis.</p>
+                <i class="fas fa-user-shield"></i>
+                <h3>Role & Department RBAC</h3>
+                <p>Investigators only ever see cases and artifacts within their assigned department and clearance,
+                    enforced at the service boundary, not just the controller.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-vault"></i>
+                <h3>Case-Scoped Vault Access</h3>
+                <p>Retrieval is strictly case-scoped — an authorized investigator gets the artifacts they're cleared
+                    for, never a raw datastore dump.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-clipboard-list"></i>
+                <h3>End-to-End Auditability</h3>
+                <p>Every upload, extraction, decrypt-on-read, and export is written to an append-only audit log for
+                    chain-of-custody compliance.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-network-wired"></i>
+                <h3>Legacy SOAP/XML Interop</h3>
+                <p>Exposes a WSDL/SOAP contract alongside the primary REST/JSON API for department systems that
+                    cannot consume REST directly.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title"><i class="fas fa-sitemap"></i> System Architecture</h2>
+        <p style="margin-bottom: 20px;">The module is layered so that parsing, extraction, security, and persistence
+            remain independent, swappable concerns — consistent with the layered Spring Boot architecture used
+            across the platform.</p>
+
+        <!-- SYSTEM DESIGN / ARCHITECTURE DIAGRAM — drop the exported diagram image here -->
+        <div class="photo-strip">
+            <img src="images\SIH-Secure-Volt.png" alt="SecureVault System Architecture Diagram">
+            <div class="photo-caption">
+                <h2 style="font-family: 'Crimson Pro'; font-size: 1.4rem;">SecureVault — Layered Architecture</h2>
+                <p style="opacity: 0.9; font-size: 0.85rem;">Gateway & Security · Ingestion & Parsing · Extraction &
+                    Validation · Encryption & Persistence · Vault Access · Cross-Cutting Audit</p>
             </div>
         </div>
 
@@ -337,24 +396,450 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><b>Vision Engine</b></td>
-                    <td>YOLOv11 Neural Network</td>
-                    <td>Automated contraband & object classification</td>
+                    <td><b>Gateway & Security</b></td>
+                    <td>Spring Security, JWT</td>
+                    <td>Filter-chain auth and RBAC enforcement at the request boundary</td>
+                </tr>
+                <tr>
+                    <td><b>Ingestion & Parsing</b></td>
+                    <td>Spring Boot, Java I/O, XML parsing</td>
+                    <td>Accepts and parses the raw UFDR upload into intermediate objects</td>
+                </tr>
+                <tr>
+                    <td><b>Extraction & Validation</b></td>
+                    <td>Java, POJO mapping, Bean Validation</td>
+                    <td>Pulls out and validates each evidence category before persistence</td>
+                </tr>
+                <tr>
+                    <td><b>Encryption & Persistence</b></td>
+                    <td>Java Cryptography (JCA), JPA / Hibernate</td>
+                    <td>AES-256 encrypts payloads and persists them per case</td>
+                </tr>
+                <tr>
+                    <td><b>Vault Access</b></td>
+                    <td>Spring Boot, Hibernate, JAXB / XSLT</td>
+                    <td>Case-scoped, RBAC-filtered retrieval and JSON/XML export</td>
+                </tr>
+                <tr>
+                    <td><b>Cross-Cutting</b></td>
+                    <td>JMS, SLF4J / Logback</td>
+                    <td>Audit logging, exception handling, and observability</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title"><i class="fas fa-cubes"></i> Module / Class Design</h2>
+        <table class="tech-table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Responsibility</th>
+                    <th>Key Tech</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>UFDRIngestionController</b></td>
+                    <td>REST endpoint for UFDR upload; multipart handling</td>
+                    <td>Spring Boot, Servlet</td>
+                </tr>
+                <tr>
+                    <td><b>UFDRReader / FileParser</b></td>
+                    <td>Reads and parses the raw UFDR export into intermediate objects</td>
+                    <td>Java I/O, XML parsing</td>
+                </tr>
+                <tr>
+                    <td><b>ArtifactExtractor</b></td>
+                    <td>Extracts calls, messages, contacts, media, and location artifacts</td>
+                    <td>Java, POJO mapping</td>
+                </tr>
+                <tr>
+                    <td><b>EvidenceModel / ArtifactEntity</b></td>
+                    <td>JPA-mapped entities representing each artifact</td>
+                    <td>JPA, Hibernate</td>
+                </tr>
+                <tr>
+                    <td><b>ValidationService</b></td>
+                    <td>Schema and integrity checks before an artifact is persisted</td>
+                    <td>Bean Validation</td>
+                </tr>
+                <tr>
+                    <td><b>EncryptionService</b></td>
+                    <td>AES-256 encrypt/decrypt of artifact payloads, per-case key scoping</td>
+                    <td>Java Cryptography (JCA)</td>
+                </tr>
+                <tr>
+                    <td><b>VaultService</b></td>
+                    <td>Case-scoped storage and retrieval; decrypts only for an authorized request</td>
+                    <td>Spring Boot, Hibernate</td>
+                </tr>
+                <tr>
+                    <td><b>RBACService / AuthorizationFilter</b></td>
+                    <td>Role + department scoping on every request</td>
+                    <td>Spring Security</td>
+                </tr>
+                <tr>
+                    <td><b>ArtifactSerializer</b></td>
+                    <td>Builds the JSON output; also drives XML/XSLT report export</td>
+                    <td>JAXB, Jackson, XSLT</td>
+                </tr>
+                <tr>
+                    <td><b>InterDeptSoapAdapter</b></td>
+                    <td>Exposes a WSDL/SOAP contract for departments on legacy integrations</td>
+                    <td>SOAP, WSDL, XML</td>
+                </tr>
+                <tr>
+                    <td><b>AuditLogService</b></td>
+                    <td>Publishes every access/extraction event for chain-of-custody audit</td>
+                    <td>JMS</td>
+                </tr>
+                <tr>
+                    <td><b>ExceptionHandler / Logger</b></td>
+                    <td>Cross-cutting error handling and structured logging</td>
+                    <td>SLF4J, Logback</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title"><i class="fas fa-shield-alt"></i> Security Design</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <i class="fas fa-users-cog"></i>
+                <h3>Role-Based Access Control</h3>
+                <p>Access is governed by a role × department matrix rather than a flat role list — Investigator,
+                    Forensic Analyst, Department Head, Administrator. A request is authorized only when the caller's
+                    role is permitted for that action and their department matches the case's owning department.
+                    Enforced with Spring Security method-level checks at the service boundary.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-key"></i>
+                <h3>Encryption at Rest</h3>
+                <p>Every artifact is AES-256 encrypted before it is written to the database, with keys scoped per
+                    case. TLS protects data in transit. Decryption happens only inside the Vault Access Layer, for a
+                    request that has already passed RBAC — nothing is decrypted speculatively or cached in plaintext.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-history"></i>
+                <h3>Auditability</h3>
+                <p>Every upload, extraction, decrypt-on-read, and export is written to an append-only audit log via a
+                    JMS queue, preserving chain-of-custody for evidence handled under NIA case procedures.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title"><i class="fas fa-random"></i> Data Flow</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <i class="fas fa-upload"></i>
+                <h3>1. Upload & Auth</h3>
+                <p>Investigator uploads a UFDR file through the console; the request passes the Spring Security
+                    filter chain (auth + RBAC check).</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-cogs"></i>
+                <h3>2. Parse & Extract</h3>
+                <p>UFDRReader parses the file, then ArtifactExtractor pulls out each evidence category.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-check-double"></i>
+                <h3>3. Validate & Encrypt</h3>
+                <p>ValidationService checks structural integrity, then EncryptionService AES-256 encrypts each
+                    artifact before JPA/Hibernate persists it against the case record.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-file-export"></i>
+                <h3>4. Serialize</h3>
+                <p>ArtifactSerializer builds the JSON representation, with XML/XSLT export where required.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-unlock-alt"></i>
+                <h3>5. Vault Access</h3>
+                <p>On access, VaultService re-checks RBAC for that case and decrypts only the requested artifacts —
+                    nothing is bulk-decrypted.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-clipboard-check"></i>
+                <h3>6. Audit</h3>
+                <p>AuditLogService records the event asynchronously via JMS, regardless of outcome.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title"><i class="fas fa-plug"></i> API Design</h2>
+        <table class="tech-table">
+            <thead>
+                <tr>
+                    <th>Endpoint</th>
+                    <th>Style</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>POST /api/v1/ufdr/upload</b></td>
+                    <td>REST / JSON</td>
+                    <td>Upload a UFDR file for parsing and extraction</td>
+                </tr>
+                <tr>
+                    <td><b>GET /api/v1/vault/case/{caseId}/artifacts</b></td>
+                    <td>REST / JSON</td>
+                    <td>Case-scoped, RBAC-filtered artifact retrieval</td>
+                </tr>
+                <tr>
+                    <td><b>GET /api/v1/vault/artifact/{id}/export</b></td>
+                    <td>XML (XSLT transform)</td>
+                    <td>Formatted evidence report export for court/departmental use</td>
+                </tr>
+                <tr>
+                    <td><b>/soap/interdept/CaseArtifactService?wsdl</b></td>
+                    <td>SOAP / WSDL / XML</td>
+                    <td>Legacy interoperability contract for departments not on REST</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title"><i class="fas fa-database"></i> Database Design</h2>
+        <p style="margin-bottom: 20px;">PostgreSQL is the primary datastore for cases, artifacts, users, roles,
+            departments, and the audit trail, accessed through JPA/Hibernate. Departments running on Oracle are
+            served through a JDBC-based adapter so they can federate case metadata without migrating off their
+            existing infrastructure.</p>
+        <table class="tech-table">
+            <thead>
+                <tr>
+                    <th>Table</th>
+                    <th>Key Columns</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>case</b></td>
+                    <td>case_id, title, department_id, status, created_at</td>
+                </tr>
+                <tr>
+                    <td><b>artifact</b></td>
+                    <td>artifact_id, case_id, type, encrypted_payload, extracted_at</td>
+                </tr>
+                <tr>
+                    <td><b>user_account</b></td>
+                    <td>user_id, department_id, role</td>
+                </tr>
+                <tr>
+                    <td><b>role_department_matrix</b></td>
+                    <td>role_id, department_id, permission_level</td>
+                </tr>
+                <tr>
+                    <td><b>audit_log</b></td>
+                    <td>event_id, actor_id, case_id, action, timestamp</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title" id="main-app-section"><i class="fas fa-brain"></i> Application 2 — Main Application</h2>
+        <p style="margin-bottom: 20px; color: var(--gold-accent); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em;">Natural-Language Query & Intelligence Platform</p>
+        <p style="margin-bottom: 30px;">The Main Application ingests UFDRs, offers a natural language query interface,
+            generates readable evidentiary reports, and runs a multi-stage AI pipeline — timeline reconstruction,
+            cross-device correlation, behavioural pattern analysis, and risk scoring — on the artifacts that
+            SecureVault has extracted and made available to it.</p>
+
+        <!-- SYSTEM DESIGN / ARCHITECTURE DIAGRAM — Main Application. Drop the exported diagram image here -->
+        <div class="photo-strip">
+            <img src="images\System-design.jpg" alt="Main Application System Architecture Diagram">
+            <div class="photo-caption">
+                <h2 style="font-family: 'Crimson Pro'; font-size: 1.4rem;">Main Application — System Architecture</h2>
+                <p style="opacity: 0.9; font-size: 0.85rem;">React Frontend · Python Flask REST API · Gemini 2.5
+                    Flash (Local) · PostgreSQL</p>
+            </div>
+        </div>
+
+        <h2 class="section-title"><i class="fas fa-microchip"></i> Core Capabilities</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <i class="fas fa-file-import"></i>
+                <h3>UFDR Ingestion</h3>
+                <p>Ingests UFDRs from industry-standard forensic tools (Cellebrite, Oxygen, MSAB) with automated
+                    validation, normalization, and artifact indexing.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-comments"></i>
+                <h3>Natural Language Query Interface</h3>
+                <p>Investigators run complex cross-device searches in plain English — no SQL or manual filtering
+                    required.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-file-signature"></i>
+                <h3>Automated Report Generation</h3>
+                <p>Generates court-ready reports, with summaries tailored to technical examiners or legal counsel.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-timeline"></i>
+                <h3>Timeline Reconstruction & Correlation</h3>
+                <p>Multi-stage AI pipeline linking activity across multiple seized devices, with behavioural anomaly
+                    detection and risk scoring for high-priority evidence.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title"><i class="fas fa-robot"></i> AI Query Engine</h2>
+        <p style="margin-bottom: 20px;">The Investigative Query Assistant lets investigators query complex datasets
+            in natural language. A locally deployed Gemini 2.5 Flash translates plain-English questions into
+            precise, schema-aware SQL, keeping evidence discovery fast while preserving data sovereignty.</p>
+        <table class="tech-table">
+            <thead>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Specification</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Model</b></td>
+                    <td>Gemini 2.5 Flash (Local / On-Premises Build)</td>
+                </tr>
+                <tr>
+                    <td><b>Function</b></td>
+                    <td>Natural Language Processing (NLP) to SQL translation</td>
+                </tr>
+                <tr>
+                    <td><b>Deployment</b></td>
+                    <td>100% air-gapped infrastructure</td>
+                </tr>
+                <tr>
+                    <td><b>Security</b></td>
+                    <td>Read-only enforcement; zero cloud dependencies</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin: 16px 0;"><b>Security & governance:</b> total data-sovereignty isolation with no external
+            API calls; a read-only architectural lock blocks destructive commands (DELETE, DROP); Context Locking
+            restricts the AI to specific Case IDs; every prompt, generated SQL statement, and timestamp is logged
+            for accountability.</p>
+
+        <h2 class="section-title"><i class="fas fa-file-pdf"></i> Automated Forensic Report Generator</h2>
+        <p style="margin-bottom: 20px;">The final integration layer between the relational database and the forensic
+            document engine — it uses a stateful selection wrapper to transform queried data into a court-admissible
+            format.</p>
+        <table class="tech-table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Technical Implementation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Data Extraction</b></td>
+                    <td>Selective tuple extraction from SQL result sets</td>
+                </tr>
+                <tr>
+                    <td><b>Annotation Logic</b></td>
+                    <td>1:1 relational mapping of IO remarks to evidence IDs</td>
+                </tr>
+                <tr>
+                    <td><b>Data Integrity</b></td>
+                    <td>SHA-256 checksum validation for tamper detection</td>
+                </tr>
+                <tr>
+                    <td><b>Audit Logging</b></td>
+                    <td>Immutable logging of selection criteria and export timestamps</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin: 16px 0;">Reports export as PDF/A-3; the system generates a SHA-256 hash of the document and
+            embeds a digital signature, providing non-repudiation and a verifiable chain of custody.</p>
+
+        <h2 class="section-title"><i class="fas fa-eye"></i> Vision-Based Intelligence <span style="font-size: 0.9rem; color: var(--gold-accent); text-transform: none;">(YOLOv11 + EasyOCR — Semi Integrated)</span></h2>
+        <p style="margin-bottom: 20px;">A YOLOv11 backbone handles real-time object detection; EasyOCR (ResNet-LSTM)
+            handles alphanumeric extraction. Together they index unstructured visual evidence into a queryable
+            relational database.</p>
+        <table class="tech-table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Status</th>
+                    <th>Implementation Detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Object Detection</b></td>
+                    <td>Active</td>
+                    <td>YOLOv11 local inference and class tagging</td>
+                </tr>
+                <tr>
+                    <td><b>OCR Extraction</b></td>
+                    <td>Active</td>
+                    <td>ROI-based text transcription via EasyOCR</td>
+                </tr>
+                <tr>
+                    <td><b>Unified Search</b></td>
+                    <td>In Progress</td>
+                    <td>Optimization of multi-modal (object + text) queries</td>
+                </tr>
+                <tr>
+                    <td><b>Batch Queuing</b></td>
+                    <td>In Progress</td>
+                    <td>Asynchronous processing for high-volume ingestion</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title"><i class="fas fa-project-diagram"></i> Cross-Case Intelligence & Link Analysis</h2>
+        <p style="margin-bottom: 20px;">Multi-tenant relational correlation identifies overlaps between disparate
+            Case IDs and UFDR sessions, using graph-based logic to map intersecting artifacts, communication
+            patterns, and shared entities.</p>
+        <table class="tech-table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Technical Implementation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Link Detection</b></td>
+                    <td>Index-optimized SQL joins across isolated Case IDs</td>
+                </tr>
+                <tr>
+                    <td><b>Network Logic</b></td>
+                    <td>Graph-based clustering of shared contacts and entities</td>
+                </tr>
+                <tr>
+                    <td><b>Similarity Engine</b></td>
+                    <td>NLP-driven string comparison for message overlap</td>
+                </tr>
+                <tr>
+                    <td><b>Visualization</b></td>
+                    <td>Dynamic node-link diagrams with interaction density weighting</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title"><i class="fas fa-layer-group"></i> Technology Stack</h2>
+        <table class="tech-table">
+            <thead>
+                <tr>
+                    <th>Layer</th>
+                    <th>Technology</th>
+                    <th>Key Objective</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Frontend</b></td>
+                    <td>React.js (component-based SPA, Hooks + Context API)</td>
+                    <td>Real-time state sync; D3.js / Cytoscape.js for network graphs and YOLO bounding-box overlays</td>
+                </tr>
+                <tr>
+                    <td><b>Backend</b></td>
+                    <td>Python Flask (REST API), Gunicorn / Uvicorn</td>
+                    <td>Orchestrates Gemini 2.5 Flash, the SQL engine, and the vision pipelines</td>
                 </tr>
                 <tr>
                     <td><b>Intelligence</b></td>
-                    <td>Llama 3 / Gemini (Local)</td>
-                    <td>Semantic summarization and entity extraction</td>
+                    <td>Gemini 2.5 Flash (local, quantized)</td>
+                    <td>NL-to-SQL transpilation and contextual analysis for report generation</td>
                 </tr>
                 <tr>
-                    <td><b>Data Core</b></td>
-                    <td>PostgreSQL / Vector DB</td>
-                    <td>High-speed relational & similarity search</td>
-                </tr>
-                <tr>
-                    <td><b>Interface</b></td>
-                    <td>HTML5 / Modern JS</td>
-                    <td>Forensic investigator dashboard</td>
+                    <td><b>Database</b></td>
+                    <td>PostgreSQL (JSON-B, Full-Text Search)</td>
+                    <td>Normalized schema for cases/sessions/artifacts; RBAC and row-level security</td>
                 </tr>
             </tbody>
         </table>
